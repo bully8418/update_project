@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+
+
+    <title>{% block title %}Интернет магазин | Главная{% endblock %}</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <!--jQuery(necessary for Bootstrap's JavaScript plugins)-->
+    <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    <!--Custom-Theme-files-->
+    <!--theme-style-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--start-menu-->
+    <link href="{% static 'css/memenu.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="{% static 'js/memenu.js' %}"></script>
+    <script>$(document).ready(function () {
+        $(".memenu").memenu();
+    });</script>
+    <script src="{% static 'js/jquery.easydropdown.js' %}"></script>
+
+
+</head>
+
+
+<body>
+<!--top-header-->
+<div class="top-header">
+    <div class="container">
+        <div class="top-header-main">
+
+            {% if request.user.is_authenticated %}
+                <p style="color: white">Вы вошли как: <b style="color: #2da5da">{{ user.username }}</b></p>
+                <a href="{% url 'logout' %}" style="color: white">Выход</a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"><h4 style="color: white; width: 50%">Войти</h4></a>
+                <a href="{% url 'reg' %}"><h4 style="color: white; left: auto">Регистрация</h4></a>
+
+            {% endif %}
+
+
+
+
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--top-header-->
+<!--start-logo-->
+<div class="logo">
+
+    <span style="margin-left: 92%;" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">1</span>
+    <a href="{% url 'cart' %}"><p style="margin:0 50% 0 70%; width:50%;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bag-check-fill"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
+        </svg></p>
+
+
+    </a>
+
+    <a href="{% url 'del' %}">
+        <p style="margin:0 50% 0 70%; width:50%; margin-top: 0.5%; color: black">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+                 viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"></path>
+                <path fill-rule="evenodd"
+                      d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"></path>
+            </svg>
+        </p>
+    </a>
+    <a href="{% url 'home' %}"><h1>Интеренет магазин</h1></a>
+</div>
+<!--start-logo-->
+
+<!--bottom-header-->
+
+<div class="header-bottom">
+    <div class="container">
+        <div class="header">
+            <div class="col-md-9 header-left">
+                <div class="top-nav">
+                    <ul class="memenu skyblue">
+                        <li class="active"><a href="{% url 'home' %}">Главная</a></li>
+
+                        <li class="grid"><a href="{% url 'category' %}">Категории</a></li>
+
+                        <li class="grid"><a href="#">Доставка</a></li>
+                        {% if request.user.is_authenticated %}
+
+                            <li class="grid"><a href="{% url 'add_product' %}">Добавить товар</a></li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-3 header-right">
+                <div class="search-bar">
+                    <form action="{% url 'search' %}" method="get">
+                        <input type="text" name="s" value="Поиск..." onfocus="this.value = '';"
+                               onblur="if (this.value === '') {this.value = 'Поиск';}">
+                        <input type="submit" value="">
+                    </form>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--bottom-header-->
+
+<!--banner-starts-->
+<div class="bnr" id="home">
+    <div class="clearfix"></div>
+</div>
+<!--banner-ends-->
+<!--Slider-Starts-Here-->
+<script src="{% static 'js/responsiveslides.min.js' %}"></script>
+<script>
+    // You can also use "$(window).load(function() {"
+    $(function () {
+        // Slideshow 4
+        $("#slider4").responsiveSlides({
+            auto: true,
+            pager: true,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+
+    });
+
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+
+    let device = getCookie('device')
+
+    if (device == null || device == undefined) {
+        device = uuidv4()
+    }
+
+    document.cookie = 'device=' + device + ";domain=;path=/"
+
+</script>
+
+
+<!--End-slider-script-->
+{% block content %}
+
+    <div class="container center-block">
+        <div class="product-top">
+            {% for el in tasks %}
+                <div class="product-one">
+                    <div class="col-md-3 product-left" style="width: 25%">
+                        <a href="{% url 'category' %}"> Категории</a>: <a
+                            href="{{ el.category.get_absolute_url }}"> {{ el.category }}</a>
+                        / <a href="{{ el.device.get_absolute_url }}">{{ el.device }}</a>
+                        <h2></h2>
+                        <div class="product-main simpleCart_shelfItem" style="margin-bottom: 10%; height: 350px">
+                            <a href="{% url 'product' el.pk %}" class="mask">
+                                {% if el.img_foto %}
+                                    <img class="img-responsive zoom-img" src="{{ el.img_foto.url }}" width="60%"
+                                         alt=""/></a>
+                                {% else %}
+                                {% endif %}
+                            <div class="product-bottom">
+                                <h4>{{ el.title }}</h4>
+                                <p></p>
+                                <h4><a class="item_add" href="#"><i></i></a> <span
+                                        class=" item_price">{{ el.price }} сум </span></h4>
+                            </div>
+                            <!--sale block-->
+                        </div>
+                    </div>
+                </div>
+                <div class="product-one"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+{% if page_obj.has_other_pages %}
+    <div class="container" style="margin:0 50% 0 40%; width:50%;">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    </li>
+                {% endif %}
+
+                {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                        <li class="page-item active" aria-current="page"><a class="page-link"
+                                                                            href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </div>
+{% endif %}
+<!--product-end-->
+<!--information-starts-->
+<div class="information">
+    <div class="container">
+        <div class="infor-top">
+            <div class="col-md-3 infor-left">
+                <h4>Мы в соц.сетях </h4>
+                <ul>
+                    <a href="https://t.me/buLLy_1991"><img
+                            src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt=""/></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

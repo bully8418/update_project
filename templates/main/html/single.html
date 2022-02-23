@@ -1,0 +1,113 @@
+{% extends 'main/html/base.html' %}
+
+{% block content %}
+	<!--start-single-->
+	<div class="single contact">
+		<div class="container">
+			<div class="single-main">
+				<div class="col-md-9 single-main-left">
+				<div class="sngl-top">
+					<div class="col-md-5 single-top-left">
+						<div class="flexslider">
+
+							  <ul class="slides">
+								<li data-thumb="images/s-1.jpg">
+                                    {% if product.img_foto %}
+                                     <div class="thumb-image"> <img src="{{ product.img_foto.url }}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                                    {% else %}
+                                    {% endif %}
+								</li>
+								<li data-thumb="images/s-2.jpg">
+									 <div class="thumb-image"> <img src="" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+								</li>
+								<li data-thumb="images/s-3.jpg">
+								   <div class="thumb-image"> <img src="" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+								</li>
+							  </ul>
+
+						</div>
+						<!-- FlexSlider -->
+
+
+						<script>
+						// Can also be used with $(document).ready()
+						$(window).load(function() {
+						  $(".flexslider").flexslider({
+							animation: "slide",
+							controlNav: "thumbnails"
+						  });
+						});
+						</script>
+					</div>
+					<div class="col-md-7 single-top-right">
+						<div class="single-para simpleCart_shelfItem">
+						<h2></h2>
+							<div class="star-on">
+								<ul class="star-footer">
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+										<li><a href="#"><i> </i></a></li>
+									</ul>
+								<div class="review">
+									<a href="#"> 1 отзывы покупателей </a>
+
+								</div>
+							<div class="clearfix"> </div>
+							</div>
+
+							<h5 class="item_price">{{ product.price }} сум </h5>
+							<p>{{ product.tex_description }}</p>
+							<div class="available">
+								<ul>
+                                    <li> <b style="color: #8B4513">Дополнительные опции</b>
+                                        <h3></h3>
+										<select style="margin-left: 0%">
+										<option>Белый</option>
+										<option>Черный</option>
+										<option>Серый</option>
+									</select></li>
+								<div class="clearfix"> </div>
+							</ul>
+						</div>
+
+                        {% if request.user.is_authenticated %}
+
+
+                            <form method="POST" action="{% url 'product' product.pk %}">
+                                {% csrf_token %}
+                                <input min="1" value=1 type="number" name="quantity">
+                                <input class="btn btn-dark" type="submit" value="Добавить">
+                            </form>
+
+
+                        {% else %}
+
+
+
+                                <div class="alert alert-danger" role="alert">Пожалуйста! авторизуйтесь для добавления товаров в корзину и оформление заказа </div>
+
+                        {% endif %}
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="tabs">
+					<ul class="menu_drop">
+				<li class="item1"><a href="#"><img src="" alt="">Описание  товара </a></li>
+
+                     <h3>{{ single_item.description }}</h3>
+                    </ul>
+                </div>
+				<div class="col-md-3 single-right">
+
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+       </div>
+	</div>
+
+
+{% endblock %}

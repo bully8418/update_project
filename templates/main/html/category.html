@@ -1,0 +1,36 @@
+{% extends 'main/html/base.html' %}
+
+{% block title %}Категории{% endblock %}
+
+{% block content %}
+<div class="container center-block">
+        <div class="product-top">
+            {% for el in cat %}
+                <div class="product-one">
+                    <div class="col-md-3 product-left" style="width: 25%">
+                        Категория: <a href="{{ el.pk }}">{{ el.title }}</a>
+                        <h2></h2>
+                        <div class="product-main simpleCart_shelfItem" style="margin-bottom: 10%; height: 350px">
+                            <a href="{{ el.pk }}" class="mask">
+                                {% if el.posters %}
+                                    <img class="img-responsive zoom-img" src="{{ el.posters.url }}" alt=""/></a>
+                                {% else %}
+                                {% endif %}
+                            <div class="product-bottom">
+                                <h3></h3>
+                                <p></p>
+                                <h4><a class="item_add" href="#"></a> <span
+                                        class=" item_price"></span></h4>
+                            </div>
+                            <!--sale block-->
+                        </div>
+                    </div>
+                </div>
+                <div class="product-one"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
